@@ -5,14 +5,22 @@ import java.util.List;
 
 
 public class FizzBuzzGame {
+    private static final int FIZZ3=3;
+    private static final int BUZZ5=5;
+    private static final int WHIZZ7=7;
+
+    private static final String RESULTFIZZ="Fizz";
+    private static final String RESULTBUZZ="Buzz";
+    private static final String RESULTWHIZZ="Whizz";
+
     private List<String> results = new ArrayList<>();
     public void start(int count) {
         for (int i = 1; i <= count; i++) {
             if (getFizz(i)) {
-                results.add("Fizz");
+                results.add(RESULTFIZZ);
             } else {
-                if (i % 3 == 0 || i % 5 == 0 || i % 7 == 0) {
-                    results.add(FizzBuzzWhizz(i, 3, "Fizz") + FizzBuzzWhizz(i, 5, "Buzz") + FizzBuzzWhizz(i, 7, "Whizz"));
+                if (i % FIZZ3 == 0 || i % BUZZ5 == 0 || i % WHIZZ7 == 0) {
+                    results.add(FizzBuzzWhizz(i, FIZZ3, RESULTFIZZ) + FizzBuzzWhizz(i, BUZZ5, RESULTBUZZ) + FizzBuzzWhizz(i, WHIZZ7, RESULTWHIZZ));
                 } else {
                     results.add(String.valueOf(i));
                 }
