@@ -5,46 +5,50 @@ import java.util.List;
 
 
 public class FizzBuzzGame {
-    private static final int FIZZ3=3;
-    private static final int BUZZ5=5;
-    private static final int WHIZZ7=7;
+    private static int FizzNumber = 3;
+    private static int BuzzNumber = 5;
+    private static int WhizzNumber = 7;
 
-    private static final String RESULTFIZZ="Fizz";
-    private static final String RESULTBUZZ="Buzz";
-    private static final String RESULTWHIZZ="Whizz";
+    private static final String RESULTFIZZ = "Fizz";
+    private static final String RESULTBUZZ = "Buzz";
+    private static final String RESULTWHIZZ = "Whizz";
 
     private List<String> results = new ArrayList<>();
+
+    public FizzBuzzGame(int FizzNumber, int BuzzNumber, int WhizzNumber) {
+        this.FizzNumber = FizzNumber;
+        this.BuzzNumber = BuzzNumber;
+        this.WhizzNumber = WhizzNumber;
+    }
+
+    public FizzBuzzGame() {
+
+    }
+
+    public String translate(int number) {
+        if (String.valueOf(number).indexOf("3") != -1)
+            return RESULTFIZZ;
+        if (number % FizzNumber == 0 || number % BuzzNumber == 0 || number % WhizzNumber == 0)
+            return HandleTranslationForMultipleCases(number);
+        return new Integer(number).toString();
+    }
+
+    private String HandleTranslationForMultipleCases(int number) {
+        String output = "";
+        if (number % FizzNumber == 0)
+            output += RESULTFIZZ;
+        if (number % BuzzNumber == 0)
+            output += RESULTBUZZ;
+        if (number % WhizzNumber == 0)
+            output += RESULTWHIZZ;
+        return output;
+    }
+
     public void start(int count) {
         for (int i = 1; i <= count; i++) {
-            if (getFizz(i)) {
-                results.add(RESULTFIZZ);
-            } else {
-                if (i % FIZZ3 == 0 || i % BUZZ5 == 0 || i % WHIZZ7 == 0) {
-                    results.add(FizzBuzzWhizz(i, FIZZ3, RESULTFIZZ) + FizzBuzzWhizz(i, BUZZ5, RESULTBUZZ) + FizzBuzzWhizz(i, WHIZZ7, RESULTWHIZZ));
-                } else {
-                    results.add(String.valueOf(i));
-                }
-
-            }
+            results.add(translate(i));
         }
     }
-
-    public Boolean getFizz(int i) {
-        if (String.valueOf(i).indexOf("3") == -1) {
-            return false;
-        }
-        return true;
-
-    }
-
-    public String FizzBuzzWhizz(int i, int element, String result) {
-        if (i % element == 0) {
-            return result;
-        }
-        return "";
-    }
-
-
     public List<String> getResults() {
         return results;
     }
